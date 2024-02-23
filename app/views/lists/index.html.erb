@@ -1,24 +1,23 @@
-<div class="container">
-  <img src="https://img.freepik.com/premium-vector/cinema-festival-social-media-cover-template_23-2149939383.jpg?w=1800" alt="Banner" class="img-fluid mb-4">
-  <h1 class="my-4 text-center display-4">All Movie Lists</h1>
-
-  <%= link_to 'Create New List', new_list_path, class: 'btn btn-primary mb-3 d-block mx-auto' %>
-
+<div class="cover mb-4 d-flex align-items-center justify-content-center">
+  <div class="text-center text-white">
+    <h1>Save any kind of movies</h1>
+    <h3 class="typed-js" data-controller="typed-js"></h3>
+  </div>
+</div>
+<div class="container py-5">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h3 class="mb-0">My Lists</h3>
+    <%= link_to "Create a movie list", new_list_path, class: "btn btn-flat" %>
+  </div>
   <div class="row">
     <% @lists.each do |list| %>
-      <div class="col-md-4 mb-3">
-        <div class="card h-100">
-          <%= image_tag("https://picsum.photos/300/200?random=#{rand(1..100)}", class: "card-img-top") %> <%# Random Image  %>
-          <div class="card-body">
-            <h5 class="card-title"><%= list.name %></h5>
+      <div class="co-12 col-sm-6 col-md-4 mb-3">
+        <%= link_to list_path(list), class:"text-decoration-none" do %>
+          <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= list.photo.attached? ? cl_image_path(list.photo.key) : asset_path('list_background.jpg') %>)">
+            <%= list.name %>
           </div>
-          <div class="card-footer">
-            <%= link_to 'Show List', list_path(list), class: 'btn btn-primary btn-sm' %>
-          </div>
-        </div>
+        <% end %>
       </div>
     <% end %>
   </div>
-
-  <%= link_to 'View Bookmarks', root_path(@list), class: 'btn btn-secondary mt-2 d-block mx-auto' %>
 </div>
